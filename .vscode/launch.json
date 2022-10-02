@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "table_calendar",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "table_calendar (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "table_calendar (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "table_calendar_example",
+            "cwd": "table_calendar_example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "table_calendar_example (profile mode)",
+            "cwd": "table_calendar_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "table_calendar_example (release mode)",
+            "cwd": "table_calendar_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

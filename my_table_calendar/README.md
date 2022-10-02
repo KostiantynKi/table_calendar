@@ -1,0 +1,1 @@
+For description of the calendar see: /table_calendar/pubspec.yaml
