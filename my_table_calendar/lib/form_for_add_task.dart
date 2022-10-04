@@ -8,14 +8,12 @@ import 'package:table_calendar_example/utils.dart';
 
 class FormTask extends StatefulWidget {
   final DateTime? selectedDay;
-  final Function? updateDayScreen;
-  final Function? updateTableEventsState;
+  // final Function? updateDayScreen;
 
   const FormTask({
     Key? key,
     this.selectedDay,
-    this.updateDayScreen,
-    this.updateTableEventsState,
+    // this.updateDayScreen,
   }) : super(key: key);
 
   @override
@@ -25,16 +23,18 @@ class FormTask extends StatefulWidget {
 class _MyFormTask extends State<FormTask> {
   final myController = TextEditingController();
 
-  List<Event> _getEventsForTheDay(DateTime day) {
-    // print("${kEvents[day]} _____________");
-    // тут запрашиваю из БД
-    return kEvents[day] ?? [];
-  }
+  // List<Event> _getEventsForTheDay(DateTime day) {
+  //   // print("${kEvents[day]} _____________");
+  //   // тут запрашиваю из БД
+  //   return kEvents[day] ?? [];
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarCubit, CalendarState>(
       builder: (context, state) {
+        final CalendarCubit readCubit = context.read<CalendarCubit>();
+
         return Form(
           child: Dialog(
               backgroundColor: Colors.blue,
@@ -104,20 +104,20 @@ class _MyFormTask extends State<FormTask> {
                               style: Theme.of(context).textTheme.headline1,
                             ),
                             onPressed: () {
-                              setState(() {
-                                myMap[DateTime(
-                                    widget.selectedDay!.year,
-                                    widget.selectedDay!.month,
-                                    widget.selectedDay!.day)] = [
-                                  Event(myController.text)
-                                ];
-                                print('myMap is $myMap');
-                                someTaskList.add(Event(myController.text));
-                                ValueNotifier(
-                                    _getEventsForTheDay(widget.selectedDay!));
-                                widget.updateTableEventsState!();
-                                widget.updateDayScreen!();
-                              });
+                              readCubit.addTask(myController.text);
+                              // setState(() {
+                              //   myMap[DateTime(
+                              //       widget.selectedDay!.year,
+                              //       widget.selectedDay!.month,
+                              //       widget.selectedDay!.day)] = [
+                              //     Event(myController.text)
+                              //   ];
+                              // print('myMap is ${state.myMap}');
+                              //   someTaskList.add(Event(myController.text));
+                              //   ValueNotifier(
+                              //       _getEventsForTheDay(widget.selectedDay!));
+                              //   widget.updateDayScreen!();
+                              // });
 
                               // newTask = myController.text;
                               // print(newTask = myController.text);

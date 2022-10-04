@@ -6,16 +6,14 @@ class CalendarState {
 
   CalendarState({this.selectedEvents});
 
-  CalendarState copyWith({List<Event>? selectedEvents}) {
-    return CalendarState(selectedEvents: selectedEvents ?? this.selectedEvents);
-  }
+  // CalendarState copyWith({List<Event>? selectedEvents}) {
+  //   return CalendarState(selectedEvents: selectedEvents ?? this.selectedEvents);
+  // }
 }
 
 class CalendarInitial extends CalendarState {}
 
 class TableCalendarState extends CalendarState {
-  List<Event>? selectedEvents;
-
-  TableCalendarState(this.selectedEvents)
+  TableCalendarState(List<Event>? selectedEvents)
       : super(selectedEvents: selectedEvents);
 }

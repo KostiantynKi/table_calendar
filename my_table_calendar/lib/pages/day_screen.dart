@@ -10,13 +10,11 @@ import 'package:table_calendar_example/utils.dart';
 class DayScreen extends StatefulWidget {
   final DateTime? selectedDay;
   // final ValueNotifier<List<Event>> selectedEvents;
-  final List<Event>? selectedEvents;
-  final Function? updateTableEventsState;
+  // final List<Event>? selectedEvents;
 
   const DayScreen({
-    required this.selectedEvents,
+    // required this.selectedEvents,
     this.selectedDay,
-    this.updateTableEventsState,
   });
 
   @override
@@ -26,8 +24,11 @@ class DayScreen extends StatefulWidget {
 class _DayScreenState extends State<DayScreen> {
   @override
   Widget build(BuildContext context) {
+    final CalendarCubit readCubit = context.read<CalendarCubit>();
+    readCubit.getEventsForTheDay(widget.selectedDay!);
     return BlocBuilder<CalendarCubit, CalendarState>(
       builder: (context, state) {
+        // if (state is CalendarState) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('DayScreen'),
@@ -41,7 +42,8 @@ class _DayScreenState extends State<DayScreen> {
                 child: ListView.builder(
                   //! need to correct mistake
                   // itemCount: widget.selectedEvents!.length,
-                  itemCount: state.selectedEvents!.length,
+                  itemCount: state.selectedEvents?.length,
+                  // itemCount: 0,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
@@ -53,10 +55,10 @@ class _DayScreenState extends State<DayScreen> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListTile(
-                        onTap: () => print('${state.selectedEvents![index]} '),
+                        // onTap: () => print('${state.selectedEvents![index]} '),
                         // title: Text('${value[index]}'),
                         // title: Text('${state.selectedEvents![index]}'),
-                        title: Text('${state.selectedEvents![index]}'),
+                        title: Text('${state.selectedEvents?[index]}'),
                       ),
                     );
                   },
@@ -66,10 +68,10 @@ class _DayScreenState extends State<DayScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FormTask(
-                      selectedDay: widget.selectedDay,
-                      // selectedDay: state.onDaySelected(),
-                      updateDayScreen: _updateDayScreen,
-                      updateTableEventsState: widget.updateTableEventsState),
+                    selectedDay: widget.selectedDay,
+                    // selectedDay: state.onDaySelected(),
+                    // updateDayScreen: _updateDayScreen,
+                  ),
                   ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
@@ -93,6 +95,9 @@ class _DayScreenState extends State<DayScreen> {
             ],
           )),
         );
+        // } else
+        //   print('123');
+        // return const Center(child: CircularProgressIndicator());
       },
     );
   }

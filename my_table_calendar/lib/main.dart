@@ -41,7 +41,8 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     CalendarCubit testCubit = BlocProvider.of<CalendarCubit>(context);
-    testCubit.getData();
+    // Загружать тут все такси
+    testCubit.getStart();
 
     return Scaffold(
       appBar: AppBar(
@@ -49,11 +50,11 @@ class _StartPageState extends State<StartPage> {
       ),
       body: BlocBuilder<CalendarCubit, CalendarState>(
         builder: (context, state) {
-          print(state.selectedEvents!);
+          // print(state.selectedEvents!);
           if (state is TableCalendarState) {
             return Center(
-              child: TableEvents(state.selectedEvents!),
-              // child: TableEvents(),
+              // child: TableEvents(state.selectedEvents!),
+              child: TableEvents(),
             );
           } else {
             return const Center(child: CircularProgressIndicator());
